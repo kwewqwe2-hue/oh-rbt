@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<model name="robot">
+  <static>false</static>
+  <link name="base_link">
+    <pose>0 0 0.1 0 0 0</pose>
+    <collision name="col"><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></geometry></collision>
+    <visual name="vis"><geometry><cylinder><radius>0.3</radius><length>0.2</length></cylinder></visual>
+  </link>
+  <link name="left_wheel"><pose>0 0.2 0.1 1.57 0 0</pose><collision><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry></collision><visual><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></visual></link>
+  <link name="right_wheel"><pose>0 -0.2 0.1 1.57 0 0</pose><collision><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry></collision><visual><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></visual></link>
+  <joint name="left_hinge" type="revolute"><parent>base_link</parent><child>left_wheel</child><axis><xyz>0 0 1</xyz></axis></joint>
+  <joint name="right_hinge" type="revolute"><parent>base_link</parent><child>right_wheel</child><axis><xyz>0 0 1</xyz></axis></joint>
+  <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+    <ros><namespace>/</namespace><remapping>cmd_vel:=cmd_vel</remapping></ros>
+    <left_joint>left_hinge</left_joint><right_joint>right_hinge</right_joint>
+    <wheel_separation>0.4</wheel_separation><wheel_diameter>0.1</wheel_diameter>
+  </plugin>
+</model>

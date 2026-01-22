@@ -1,0 +1,6 @@
+<launch>
+  <param name="/use_sim_time" value="true"/>
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver" args="$(find warehouse_sim_pkg)/worlds/warehouse.world" output="screen"/>
+  <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" output="screen"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>
